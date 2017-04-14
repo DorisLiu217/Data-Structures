@@ -1,0 +1,74 @@
+/*Binaray Tree Preorder Traversal*/
+/*Iterative Solution*/
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+ /* Only push the right node into stack*/
+public class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> list = new LinkedList<>();
+        if(root==null) return list;
+        TreeNode cur = root;
+        Stack<TreeNode> s = new Stack<>();
+        while(cur!=null || !s.empty()){
+            while(cur!=null){
+                list.add(cur.val);
+                if(cur.right!=null)
+                    s.push(cur.right);
+                cur = cur.left;
+            }
+            if(!s.empty()){
+                cur = s.pop();
+            }
+        }
+        return list;
+    }
+}
+/*Recursive Solution*/
+Public class Solution{
+	public void preorderTraversal(TreeNode root){
+		// Your code goes here
+       if(root==null) return;
+       visit(root);
+       if(root.left!=null){
+           preorder(root.left);
+       }
+       if(root.right!=null){
+           preorder(root.right);
+       }
+	}
+}
+/*Another Iterative Solution*/
+    void iterativePreorder(Node node) {
+         
+        // Base Case
+        if (node == null) {
+            return;
+        }
+ 
+        // Create an empty stack and push root to it
+        Stack<Node> nodeStack = new Stack<Node>();
+        nodeStack.push(root);
+ 
+        while (nodeStack.empty() == false) {
+             
+            // Pop the top item from stack and print it
+            Node mynode = nodeStack.peek();
+            System.out.print(mynode.data + " ");
+            nodeStack.pop();
+ 
+            // Push right and left children of the popped node to stack
+            if (mynode.right != null) {
+                nodeStack.push(mynode.right);
+            }
+            if (mynode.left != null) {
+                nodeStack.push(mynode.left);
+            }
+        }
+    }

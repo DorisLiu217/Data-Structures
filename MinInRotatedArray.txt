@@ -1,0 +1,45 @@
+/*Find Minimum in Rotated Sorted Array*/
+/*O(n) Solution*/
+
+public class Solution {
+    public int findMin(int[] nums) {
+        int i = 0;
+        while(i<nums.length && !isValley(nums,i)){
+            i++;
+        }
+        return nums[i];
+    }
+    public boolean isValley(int nums[], int index){
+        if(nums.length==1) return true;
+        int size = nums.length;
+        if(index==0){
+            if(nums[index]<=nums[index+1] && nums[index]<=nums[size-1])
+                return true;
+        }else if(index==size-1){
+            if(nums[index]<=nums[index-1] && nums[index]<=nums[0])
+                return true;
+        }else{
+            if(nums[index]<=nums[index+1] && nums[index]<=nums[index-1])
+                return true;
+        }
+        return false;
+    }
+}
+
+/*Binary Search Solution - Time Complexity - O(logN)*/
+public class Solution {
+    public int findMin(int[] nums) {
+        if(nums.length==1) return nums[0];
+        int low = 0;
+        int high = nums.length-1;
+        while(low<high){
+            int mid = (low+high)/2;
+            if(nums[mid]>nums[high]){
+                low = mid+1;
+            }else{
+                high = mid;
+            }
+        }
+        return nums[low];
+    }
+}
