@@ -1,0 +1,43 @@
+/*Insert Interval*/
+/*Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary).
+
+You may assume that the intervals were initially sorted according to their start times.
+
+Example 1:
+Given intervals [1,3],[6,9], insert and merge [2,5] in as [1,5],[6,9].*/
+
+/*O(n) Time Solution and O(n)Space*/
+
+/**
+ * Definition for an interval.
+ * public class Interval {
+ *     int start;
+ *     int end;
+ *     Interval() { start = 0; end = 0; }
+ *     Interval(int s, int e) { start = s; end = e; }
+ * }
+ */
+public class Solution {
+    public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
+        LinkedList<Interval> res = new LinkedList<>();
+        int i = 0;
+        int size = intervals.size();
+        
+        //find merge start point
+        while(i<size && intervals.get(i).end < newInterval.start){
+            res.add(intervals.get(i++));
+        }       
+        //merge
+        while(i<size && intervals.get(i).start <= newInterval.end){
+            Interval temp = intervals.get(i);
+            newInterval = new Interval(Math.min(newInterval.start,temp.start), Math.max(newInterval.end,temp.end));
+            i++;
+        }
+        res.add(newInterval);
+		//add rest Intervals
+        while(i<size){
+            res.add(intervals.get(i++));
+        }
+        return res;
+    }
+}
