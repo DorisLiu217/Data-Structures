@@ -1,6 +1,6 @@
 /*recursive Insertion Sort*/
 void recursiveInsertionSort(int[] arr, int n){
-	if(n==1) return arr;
+	if(n==0 || n==1) return arr;
 	recursiveInsertionSort(arr, n-1);
 	//insert Nth number into sorted array
 	int key = arr[n-1];
