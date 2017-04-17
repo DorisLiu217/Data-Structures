@@ -31,10 +31,8 @@ public class Solution {
     public void inorderTraversal(TreeNode root) {
         if(root == null) return list;
         TreeNode cur = root;
-		if(root.left != null)
-			return inorderTraversal(root.left);
-		visit(root);
-		if(root.right != null)
-			return inorderTraversal(root.right);        
+	return inorderTraversal(root.left);
+	visit(root);
+	return inorderTraversal(root.right);        
     }
 }
