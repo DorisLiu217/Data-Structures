@@ -1,0 +1,38 @@
+/*LinkedList Insert Sort*/
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode insertionSortList(ListNode head) {
+        if(head==null || head.next == null) return head;
+        
+        ListNode dummy = new ListNode(Integer.MIN_VALUE);
+        dummy.next = head;
+        ListNode cur = head.next;
+        ListNode pos = head;
+       
+        while(cur != null){
+            ListNode helper = dummy;
+            while(helper.val<=cur.val && helper!=cur){
+                if(helper.next.val > cur.val) break;
+                else helper = helper.next;
+            }
+            if(helper==cur){
+                cur = cur.next;
+                pos = pos.next;
+            }else{
+                //Insert Node
+                pos.next = cur.next;
+                cur.next = helper.next;
+                helper.next = cur;
+                cur = pos.next;
+            }
+        }
+        return dummy.next;
+    }
+}
