@@ -1,0 +1,29 @@
+/*Sum root to leaf numbers*/
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    int total;
+    public int sumNumbers(TreeNode root) {
+        total = 0;
+        preOrder(root, 0);
+        return total;
+    }
+    public void preOrder(TreeNode root, int sum){
+        if(root == null) return;
+        sum = sum*10 + root.val;
+        
+        if(root.left == null && root.right == null){
+            total += sum;
+            return;
+        }
+        preOrder(root.left, sum);
+        preOrder(root.right, sum);
+    }
+}

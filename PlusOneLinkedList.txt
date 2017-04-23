@@ -1,0 +1,36 @@
+/*Plus One*/
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode plusOne(ListNode head) {
+        if(head == null) return head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode cur = head;
+        Stack<ListNode> stack = new Stack<>();
+        int carry = 1;
+        
+        while(cur != null){
+            stack.push(cur);
+            cur = cur.next;
+        }
+        while(!stack.empty()){
+            cur = stack.pop();
+            int temp = cur.val;
+            cur.val = (temp + carry)%10;
+            carry = (temp + carry)/10;
+        }
+        if(carry == 1){
+            ListNode temp = new ListNode(1);
+            dummy.next = temp;
+            temp.next = head;
+        }
+        return dummy.next;
+    }
+}
