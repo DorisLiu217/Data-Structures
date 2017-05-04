@@ -1,0 +1,38 @@
+public class Solution {
+    /**
+     * @param A an integer array sorted in ascending order
+     * @param target an integer
+     * @return an integer
+     */
+    public int closestNumber(int[] A, int target) {
+        // Write your code here
+        if (A.length == 0 || A == null) {
+            return -1;
+        }
+        int low = 0;
+        int high = A.length - 1;
+        int minDis = Integer.MAX_VALUE;
+        int index = 0;
+        if (A[low] >= target) {
+            return low;
+        }
+        if (A[high] <= target) {
+            return high;
+        }
+        while (low + 1 < high) {
+            int mid = (low + high) / 2;
+            if (A[mid] > target) {
+                high = mid;
+            } else if (A[mid] < target) {
+                low = mid;
+            } else {
+                return mid;
+            }
+        }
+        if (target - A[low] > A[high] - target) {
+            return high;
+        } else {
+            return low;
+        }
+    }
+}
